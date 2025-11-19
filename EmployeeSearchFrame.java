@@ -151,3 +151,6 @@ public class EmployeeSearchFrame extends JFrame {
 		contentPane.add(textAreaEmployee);
 	}
 }
+
+
+//End of File
