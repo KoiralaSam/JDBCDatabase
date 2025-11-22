@@ -18,7 +18,7 @@ import javax.swing.JList;
 import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JScrollPane;
+//import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 public class EmployeeSearchFrame extends JFrame {

@@ -5,15 +5,16 @@ public class SetProperties {
     public static void main(String[] args) {
         Properties properties = new Properties();
 
-        properties.setProperty("DATABASE_URL", "mysql -h ulm-csci-lonsmith2.ccr8ibhqw8qf.us-east-2.rds.amazonaws.com -P 3306 -p");
-        properties.setProperty("DATABASE_USERNAME", "");
-        properties.setProperty("DATABASE_PASSWORD", "");
-
-        try {
-            FileWriter writer = new FileWriter("config.properties");
-            properties.store( writer, "Database configuration");
+        properties.setProperty("DATABASE_URL", "jdbc:mysql://127.0.0.1:3306/");
+        properties.setProperty("DATABASE_USERNAME", "root");
+        properties.setProperty("DATABASE_PASSWORD", "MyL!feMyW@y1234");
+        properties.setProperty("DATABASE_DRIVER", "com.mysql.cj.jdbc.Driver");
+        try (
+            FileWriter writer = new FileWriter("config.properties")) 
+            {
+            properties.store(writer, "Database configuration");
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 }
