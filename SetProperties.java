@@ -7,7 +7,7 @@ public class SetProperties {
 
         properties.setProperty("DATABASE_URL", "jdbc:mysql://127.0.0.1:3306/");
         properties.setProperty("DATABASE_USERNAME", "root");
-        properties.setProperty("DATABASE_PASSWORD", "Aryanm110");
+        properties.setProperty("DATABASE_PASSWORD", "");
         properties.setProperty("DATABASE_DRIVER", "com.mysql.cj.jdbc.Driver");
         try (
             FileWriter writer = new FileWriter("config.properties")) 

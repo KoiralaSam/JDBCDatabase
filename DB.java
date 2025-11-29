@@ -5,8 +5,7 @@ import java.util.Properties;
 public class DB {
     public static Connection GetDB() {
         Connection con = null;
-        try {
-            FileReader reader = new FileReader("config.properties");
+        try (FileReader reader = new FileReader("config.properties")) {
             Properties p = new Properties(); 
             p.load(reader);
 
@@ -20,10 +19,8 @@ public class DB {
             con = DriverManager.getConnection(dburl, dbusername, dbpassword);
             
             if(!con.isClosed()){
-                System.out.println("Successfully connected to PostgreSQL server using TCP/IP...");
+                System.out.println("Successfully connected to mySql server using TCP/IP...");
             }
-
-            
         } catch (Exception e) {
             System.err.println("Database connection error: " + e.getMessage());
             e.printStackTrace();

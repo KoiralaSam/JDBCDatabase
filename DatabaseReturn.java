@@ -1,19 +1,11 @@
-import java.util.List;
+import java.util.ArrayList;
 
 public class DatabaseReturn {
-    public List<String> results;
+    public ArrayList<String> data;
     public String errorMessage;
 
-    public DatabaseReturn(List<String> results, String errorMessage) {
-        this.results = results;
+    public DatabaseReturn(ArrayList<String> data, String errorMessage) {
+        this.data = data;
         this.errorMessage = errorMessage;
-    }
-
-    public List<String> getResults() {
-        return results;
-    }
-
-    public String getErrorMessage() {
-        return errorMessage;
     }
 }
