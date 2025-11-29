@@ -20,7 +20,7 @@ public class FillDatabase {
            
 
             String query_departments = """
-                    SELECT * FROM DEPARTMENT;
+                    SELECT DISTINCT Dname FROM DEPARTMENT;
                     """;
 
             try (Statement stmt = con.createStatement()) {
@@ -28,13 +28,15 @@ public class FillDatabase {
                 stmt.execute("USE " + databaseName);
 
                 ResultSet result = stmt.executeQuery(query_departments);
+                java.util.Set<String> uniqueDepartments = new java.util.HashSet<>();
 
                 while (result.next()) {
                     String Dname = result.getString("Dname");
                     if(Dname != null){
-                        departments.add(Dname);
+                        uniqueDepartments.add(Dname);
                     }
                 }
+                departments.addAll(uniqueDepartments);
             }
             
 
@@ -65,19 +67,20 @@ public class FillDatabase {
                 stmt.execute("USE " + databaseName);
 
                 String query_projects = """
-                    SELECT * FROM PROJECT;
+                    SELECT DISTINCT Pname FROM PROJECT;
                     """;
 
                 ResultSet result = stmt.executeQuery(query_projects);
+                java.util.Set<String> uniqueProjects = new java.util.HashSet<>();
 
                 while (result.next()) {
                     String Pname = result.getString("Pname");
 
                     if(Pname != null){
-                        projects.add(Pname);
+                        uniqueProjects.add(Pname);
                     }
-                    
                 }
+                projects.addAll(uniqueProjects);
             }
             con.close();
 
@@ -101,7 +104,7 @@ public class FillDatabase {
         try {
             StringBuilder query_employees = new StringBuilder();
 
-            query_employees.append("SELECT E.Fname, E.Lname FROM EMPLOYEE E ");
+            query_employees.append("SELECT DISTINCT E.Fname, E.Lname FROM EMPLOYEE E ");
 
             //checking to see if the user has selected any departments
             Boolean needsDepartment = !selectedDepartment.isEmpty();
@@ -173,11 +176,15 @@ public class FillDatabase {
                 stmt.execute("USE " + databaseName);
 
                 try (ResultSet result = stmt.executeQuery(query)) {
+                    java.util.Set<String> uniqueEmployees = new java.util.HashSet<>();
                     while (result.next()) {
                         String Fname = result.getString("Fname");
                         String Lname = result.getString("Lname");
-                        employees.add(Fname + " " + Lname);
+                        if (Fname != null && Lname != null) {
+                            uniqueEmployees.add(Fname + " " + Lname);
+                        }
                     }
+                    employees.addAll(uniqueEmployees);
                 }
             }
             
@@ -193,4 +200,3 @@ public class FillDatabase {
         
     }
 }
-
