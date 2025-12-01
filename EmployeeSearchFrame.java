@@ -171,8 +171,12 @@ public class EmployeeSearchFrame extends JFrame {
 				
 				DatabaseReturn empReturn = FillDatabase.GetEmployees(deptNotChecked, prjNotChecked, selectedDepartment, selectedProject, databaseName);
 				if (empReturn.errorMessage.isEmpty()) {
-					for(String employee: empReturn.data){
-						textAreaEmployee.append(employee + "\n");
+					if (empReturn.data.isEmpty()) {
+						textAreaEmployee.setText("No employee found for the set configuration");
+					} else {
+						for(String employee: empReturn.data){
+							textAreaEmployee.append(employee + "\n");
+						}
 					}
 				} else {
 					textAreaEmployee.setText("Error: " + empReturn.errorMessage);
